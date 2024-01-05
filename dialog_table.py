@@ -274,9 +274,9 @@ class Ui_Dialog(object):
                     self.db_connection.add_query("UPDATE '{}' SET {} = '{}' WHERE id = {};".format(self.table_name, column_title, value, identifier))
 
                 if column_title in ['position_id', 'employee_id', 'service_id', 'client_id']:
-                    item = QtWidgets.QTableWidgetItem(dt)
+                    item_tmp = QtWidgets.QTableWidgetItem(dt)
                     self.tableWidget.blockSignals(True)
-                    self.tableWidget.setItem(row, column_number, item)
+                    self.tableWidget.setItem(row, column_number, item_tmp)
                     self.tableWidget.blockSignals(False)
 
             except Exception as e:
@@ -289,8 +289,8 @@ class Ui_Dialog(object):
                     text += f'{row_col}: {error_text}\n'
                 self.plainTextEdit.setPlainText(text)
 
-    def check_row_completion(self, item):
-        current_row = item.row()
+    def check_row_completion(self):
+        current_row = self.tableWidget.currentRow()
         if self.new_row == current_row:
             is_row_complete = all(
                 self.tableWidget.item(current_row, col) is not None
