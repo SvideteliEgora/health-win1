@@ -261,8 +261,6 @@ class Ui_Dialog(object):
                 # dt = eval(expression)
                 dt = column_validate_func(data)
 
-                print(dt)
-
                 if self.errors.get(str((row, column_number))):
                     del self.errors[str((row, column_number))]
 
@@ -329,7 +327,6 @@ class Ui_Dialog(object):
         for col in range(column_count):
             item = self.tableWidget.item(last_row, col)
             if not item or self.plainTextEdit.toPlainText():
-                print(f'Error (row {last_row}; col {col}): empty field')
                 flag = False
         if flag:
             self.tableWidget.setRowCount(self.tableWidget.rowCount() + 1)
@@ -391,7 +388,6 @@ class Ui_Dialog(object):
         self.flag_on_item_changed = False
         self.db_connection.clear_queries()
         if self.new_identifiers:
-            print(self.new_identifiers)
             for identifier in self.new_identifiers:
                 self.db_connection.execute_one("DELETE FROM {} WHERE id = {}".format(self.table_name, identifier))
             self.new_identifiers.clear()
